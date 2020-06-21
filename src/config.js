@@ -1,18 +1,46 @@
-export default {
-  MAX_ATTACHMENT_SIZE: 5000000,
+const dev = {
   STRIPE_KEY: "pk_test_51GuI8UDyCRFuyK4FkN7NpD7G9yonb5kGv9Q22iG0Bez5EWIc67uNjLubnWGq19lqC3PaUylwiJiJxf5FOTXolJMv00OgvzbNjP",
-    s3: {
-      REGION: "ap-south-1",
-      BUCKET: "notes-app-uploads-katti"
-    },
-    apiGateway: {
-      REGION: "ap-south-1",
-      URL: "https://opt61iwzzi.execute-api.ap-south-1.amazonaws.com/prod"
-    },
-    cognito: {
-      REGION: "ap-south-1",
-      USER_POOL_ID: "ap-south-1_LBinifpEU",
-      APP_CLIENT_ID: "50jh61akmuert83ltu4f18t0i2",
-      IDENTITY_POOL_ID: "ap-south-1:d96663ed-c627-4c5c-ba97-8ca1ab070292"
-    }
-  };
+  s3: {
+    REGION: "ap-south-1",
+    BUCKET: "notes-app-2-api-dev-attachmentsbucket-z21hh95y5oor"
+  },
+  apiGateway: {
+    REGION: "ap-south-1",
+    URL: "https://pb2u5b5ang.execute-api.ap-south-1.amazonaws.com/dev"
+  },
+  cognito: {
+    REGION: "ap-south-1",
+    USER_POOL_ID: "ap-south-1_D55ggEg9c",
+    APP_CLIENT_ID: "1vlivq90h51pufeac75q97l6cg",
+    IDENTITY_POOL_ID: "ap-south-1_D55ggEg9c"
+  }
+};
+
+const prod = {
+  STRIPE_KEY: "pk_test_51GuI8UDyCRFuyK4FkN7NpD7G9yonb5kGv9Q22iG0Bez5EWIc67uNjLubnWGq19lqC3PaUylwiJiJxf5FOTXolJMv00OgvzbNjP",
+  s3: {
+    REGION: "ap-south-1",
+    BUCKET: "notes-app-2-api-prod-attachmentsbucket-9v39njspao7j"
+  },
+  apiGateway: {
+    REGION: "ap-south-1",
+    URL: "https://c9egmu7p7e.execute-api.ap-south-1.amazonaws.com/prod"
+  },
+  cognito: {
+    REGION: "ap-south-1",
+    USER_POOL_ID: "ap-south-1_OAiwZZvRU",
+    APP_CLIENT_ID: "3u9g70ovkjqfpksovfpvs7163j",
+    IDENTITY_POOL_ID: "ap-south-1_OAiwZZvRU"
+  }
+};
+
+// Default to dev if not set
+const config = process.env.REACT_APP_STAGE === 'prod'
+  ? prod
+  : dev;
+
+export default {
+  // Add common config values here
+  MAX_ATTACHMENT_SIZE: 5000000,
+  ...config
+};
